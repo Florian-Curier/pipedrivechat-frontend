@@ -1,0 +1,125 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color: #183153;
+    
+    }
+    
+    .configcontent {
+    display:flex;
+    flex-direction: column;
+    border: 1px #DADADA solid;
+    height: 100%;
+    
+    
+    }
+    
+    .configheading {
+    display:flex;
+    flex-direction: column;
+
+    .maintitle {
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    .sectionparagraph {
+        margin-top: 0.5vh;
+        margin-bottom: 2vh;
+        
+    }
+    
+    }
+    
+    .alertstablecontainer {
+    display:flex;
+    flex-direction: column;
+    
+    
+    }
+
+    .alertstablecontainer table {
+        font-family: inherit;
+        border-collapse: collapse;
+        width: 100%;
+    
+      }
+    
+    .alertstablecontainer text {
+        padding-right:4vw;
+        padding-left:4vw;
+    }
+      
+      .alertstablecontainer td {
+        border: 1px solid #DADADA;
+        text-align: left;
+        padding-bottom: 3.2vh;
+        padding-top: 3.2vh;
+        border-left: none;
+        border-right: none;
+        
+      }
+    
+      .alertstablecontainer th {
+        border: 1px solid #DADADA;
+        text-align: left;
+        padding-bottom: 3.2vh;
+        padding-top: 3.2vh;
+        border-left: none;
+        border-right: none;
+      }
+    
+      .delete {
+        padding-left:1vw;
+        cursor: pointer;
+    
+      }
+    
+      .edit {
+        cursor: pointer;
+        padding-left:0.5vw;
+      }
+    
+      .alertstablecontainer button {
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        /*optional*/
+        font-family: inherit;
+        font-size: inherit;
+        /*input has OS specific font-family*/
+        color: #37AFFF;
+        cursor: pointer;
+      }
+    
+      .alertstablecontainer button:hover{
+        background: none;
+        text-decoration: underline;
+     }
+
+     .configfooter {
+        display:flex;
+        flex-direction: column;
+        
+        
+        }
+        
+        .helpsection {
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content:flex-end;
+        margin-top: 20vh;
+        padding-bottom: 5vh;
+        padding-right: 5vh;
+        }
+        
+        .helptext {
+        
+        }
+        .helpicon {
+        font-size: 2.5vw;
+        padding-left: 1vw;
+        }
