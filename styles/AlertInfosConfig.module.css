@@ -1,0 +1,29 @@
+.container{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.alertName{
+    margin: 10px 40px 0px 40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.alertNameCount{
+    margin: 0px 0px 0px 45px;
+}
+
+.trigger, .channel{
+    margin: 10px 40px 10px 40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 20px;
+}
