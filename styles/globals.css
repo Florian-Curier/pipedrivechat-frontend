@@ -22,6 +22,17 @@ body {
   border: none;
   color: white;
   width: 80px;
+  cursor: pointer;
+}
+
+.btnWhite{
+  padding: 8px 12px 8px 12px;
+  border-radius: 8px;
+  color: #303030;
+  border: 1px solid #DADADA;
+  width: 80px;
+  background-color: white;
+  cursor: pointer;
 }
 
 .bgRed{

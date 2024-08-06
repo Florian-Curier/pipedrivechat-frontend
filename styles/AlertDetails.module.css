@@ -1,0 +1,53 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px 0px 10px;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #DADADA;
+}
+
+.header span {
+    cursor: pointer;
+}
+
+.infosBox{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px 20px 0px;
+}
+
+.infosSubBox{
+    width: 100vw;
+}
+
+.logsBox{
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid #DADADA;
+}
+
+.logsListTitle{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.logsItem{
+    border-top: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.logsSubItem{
+    width: 15vw;
+    justify-content: center;
+    text-align: center;
+}
