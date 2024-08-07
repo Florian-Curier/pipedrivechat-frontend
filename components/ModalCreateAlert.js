@@ -30,7 +30,7 @@ function ModalCreateAlert() {
 
     // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
     if(stage === 3){
-        fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts` {
+        fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
 	        body: JSON.stringify(newAlert),
