@@ -11,7 +11,6 @@ function ModalCreateAlert() {
     // Variable permettant de gérer l'état d'avancement de la création d'une alerte
     const [stage, setStage] = useState(1)
     
-
     // Fonction permettant de récupérer les données de la nouvelle alerte renseignées par l'utilsiateur dans les sous composants
     const updateNewAlert = (newInfoAlert) => {
         setNewAlert({...newAlert, ...newInfoAlert});
@@ -27,6 +26,22 @@ function ModalCreateAlert() {
     let colorStage = 'bgGray'
     if(stage === 2){
         colorStage = 'bgGreen'
+    }
+
+    // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
+    if(stage === 3){
+        fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts` {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+	        body: JSON.stringify(newAlert),
+        }).then(response => response.json()).then(data => {
+            if(data.result){
+                setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
+                handleVisibleModal(false)
+            } else {
+                console.log(data.error)
+            }
+        })
     }
 
     return (<>
