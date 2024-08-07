@@ -12,8 +12,8 @@ function AlertInfosConfig(props) {
     const [trigger, setTrigger] = useState(props.newAlert.trigger_id)
     const [channel, setChannel] = useState(props.newAlert.google_channel_id)
 
-    const [triggersList, setTriggersList] = useState()
-    const [channelsList , setChannelsList] = useState()
+    const [triggersList, setTriggersList] = useState([])
+    const [channelsList , setChannelsList] = useState([])
 
 
     // Fetch des triggers
@@ -30,13 +30,11 @@ function AlertInfosConfig(props) {
         fetchTriggers()
     },[])
 
-    console.log('triggers : ' , triggersList)
 
     // Fetch des channels du user
 
     useEffect(() => {
         const fetchChannels = async () => {
-    
         const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/users/channels/${user.pipedrive_company_id}/${user.pipedrive_user_id}`)
         const data = await response.json()
         setChannelsList(data.channels)
@@ -47,26 +45,38 @@ function AlertInfosConfig(props) {
     },[])
 
 
-    console.log('channels : ' , channelsList)
-
     // Fonction permettant de transmettre au composant parent les infos saisies par l'utilisateur
+
     const nextStage = () => {
-        let newAlert = {alert_name: alertName, trigger_id: trigger, google_channel_id: channel}
-        props.updateNewAlert(newAlert)
+
+        let triggerData = triggersList.filter(e => e._id === trigger)
+        let channelData = channelsList.filter(e => e.name === channel)
+        let newAlert = {alert_name: alertName, trigger: triggerData[0] ,  google_channel_id: channelData[0].name.slice(7) , google_channel_name:channelData[0].displayName}
+        console.log( 'new alert : ', newAlert)
+        //props.updateNewAlert(newAlert)
     }
 
     // Fonction permettant de fermer la modal
+
     const cancelStage = () => {
         props.handleVisibleModal(false)
     }
 
+    // Boucle sur les triggers fetchés pour créer la liste déroulante
+
     let triggerSelectOptions = []
 
     for (let element of triggersList){
-
-        <option value="newDeal">New deal</option>
+     triggerSelectOptions.push(<option  value={element._id}>{element.trigger_name}</option>)   
     }
-    
+
+    // Boucle sur les channels fetchés pour créer la liste déroulante
+
+    let channelSelectOptions = []
+
+    for (let element of channelsList){
+        channelSelectOptions.push(<option value={element.name}>{element.displayName}</option>)   
+       }
    
   
 
@@ -84,8 +94,8 @@ function AlertInfosConfig(props) {
 
             <select className={styles.channel} onChange={(e) => setChannel(e.target.value)}>
                 <option value="">Choose an channel</option>
-                <option value="channel1">Channel 1</option>
-                <option value="channel2">Channel 2</option>
+                {channelSelectOptions}
+   
             </select>
             
             <div className={styles.footer}>
