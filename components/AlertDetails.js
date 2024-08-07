@@ -2,7 +2,106 @@ import styles from '../styles/AlertDetails.module.css';
 import Link from 'next/link';
 
 function AlertDetails() {
-    
+    let data = [
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Not Delivery",
+            google_error_message: "Error lors de l'envoi du message",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Not Delivery",
+            google_error_message: "Error lors de l'envoi du message",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+        {
+            message_text: "Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE", 
+            pipedrive_event: "New deal",
+            google_response_status: "Delivery",
+            google_error_message: "RAS",
+            creation_date : "03/01/2024 - 14h23",
+            interactions: 2,
+        },
+    ]
+
+    let listLogs = data.map(log => {
+        let styleItem = {backgroundColor: 'rgba(45, 134, 71, 0.75)'}
+        if(log.google_response_status === "Not Delivery"){
+            styleItem = {backgroundColor: 'rgba(216, 60, 56, 0.75)'}
+        }
+
+        return (
+            <div className={styles.logsItem} style={styleItem}>
+                <div className={styles.logsSubItem}><p>{log.pipedrive_event}</p></div>
+                <div className={styles.logsSubItem}><p>{log.creation_date}</p></div>
+                <div className={styles.logsSubItem}><p>{log.message_text}</p></div>
+                <div className={styles.logsSubItem}><p>{log.google_response_status}</p></div>
+                <div className={styles.logsSubItem}><p>{log.google_error_message}</p></div>
+            </div>
+        )
+    })
+
     return (
     <div className={styles.container}>
         <div className={styles.header}>
@@ -37,7 +136,6 @@ function AlertDetails() {
             </div>
 
             <div className={styles.logsListTitle}>
-                <div className={styles.logsSubItem}><p>DATE PIPEDRIVE EVENT</p></div>
                 <div className={styles.logsSubItem}><p>PIPEDRIVE EVENT</p></div>
                 <div className={styles.logsSubItem}><p>DATE CREATE MESSAGE</p></div>
                 <div className={styles.logsSubItem}><p>CONTENT MESSAGE</p></div>
@@ -46,23 +144,7 @@ function AlertDetails() {
             </div>
 
             <div className={styles.logsListItems}>
-                <div className={styles.logsItem}>
-                    <div className={styles.logsSubItem}><p>01/01/2024 - 09h06</p></div>
-                    <div className={styles.logsSubItem}><p>New deal</p></div>
-                    <div className={styles.logsSubItem}><p>01/01/2024 - 09h07</p></div>
-                    <div className={styles.logsSubItem}><p>Un nouveau deal a été créé le 01/01/2024 pour la société LA CAPSULE</p></div>
-                    <div className={styles.logsSubItem}><p>Delivery</p></div>
-                    <div className={styles.logsSubItem}><p>RAS</p></div>
-                </div>
-
-                <div className={styles.logsItem}>
-                    <div className={styles.logsSubItem}><p>03/01/2024 - 14h23</p></div>
-                    <div className={styles.logsSubItem}><p>New deal</p></div>
-                    <div className={styles.logsSubItem}><p>03/01/2024 - 14h24</p></div>
-                    <div className={styles.logsSubItem}><p>Un nouveau deal a été créé le 03/01/2024 pour la société LA CAPSULE</p></div>
-                    <div className={styles.logsSubItem}><p>Not delivery</p></div>
-                    <div className={styles.logsSubItem}><p>Error : Le message n'a pas été délivré, car il y a eu un problème</p></div>
-                </div>
+                {listLogs}
             </div>
         </div>
     </div>
