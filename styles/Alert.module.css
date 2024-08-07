@@ -3,7 +3,7 @@
     justify-content: space-evenly;
     align-items: center;
     height: 8vh;
-    width: 50vw;
+    width: 100%;
     border: 1px solid #DADADA;
     border-top: none;
     border-left: none;
@@ -16,8 +16,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25vh;
+    width: 25%;
+    height: 8vh;
     font-size: 14px;
+
 
 }
 
@@ -28,7 +30,7 @@
     background: none;
     border: none;
     display: flex;
-    width: 25vh;
+    width: 25%;
     height: 8vh;
     font-size: 14px;
     cursor: pointer;
@@ -42,18 +44,22 @@
 
 .alertIcons {
     display: flex;
-    justify-content: center;
-    width: 25vh;
-    padding-left: 70px;
+    justify-content: space-evenly;
+    padding-left: 50px;
+    padding-right: 50px;
+    align-items: center;
+    height: 8vh;
+    width: 25%;
+ 
  
 }
 
 
 .delete {
-    padding-right: 20px;
+
     cursor: pointer;
     color: gray;
-    padding-left: 20px;
+
   }
 
   .delete :hover {
@@ -63,7 +69,6 @@
   .edit {
     cursor: pointer;
     color: gray;
-    padding-right: 10px;
   }
 
   .edit :hover {

@@ -29,7 +29,7 @@ const handleClickDeleteAlert= () => {
         <span className={styles.alertIcons}>
             <FontAwesomeIcon icon={faPen} className={styles.edit} onClick={() => handleClickEditAlert()} />  
             <FontAwesomeIcon icon={faTrash} className={styles.delete} onClick={() => handleClickDeleteAlert()} />
-            </span>
+        </span>
     </div>
     )
 

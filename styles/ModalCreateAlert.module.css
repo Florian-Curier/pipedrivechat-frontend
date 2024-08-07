@@ -25,3 +25,19 @@
     cursor: pointer;
 }
 
+.newAlert {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 20px;
+    font-family: inherit;
+    font-size: inherit;
+    color: #37AFFF;
+    cursor: pointer;
+  }
+  
+  .newAlert :hover {
+    background: none;
+    text-decoration: underline;
+  
+  }

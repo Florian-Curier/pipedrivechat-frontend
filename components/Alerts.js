@@ -59,7 +59,6 @@ const handleClickNewAlert = () => {
 }
 
     return (
-
         <div className={styles.container}>
                 <div className={styles.configcontent}>
                     <div className={styles.configheading}>
@@ -84,8 +83,8 @@ const handleClickNewAlert = () => {
                     </div>
 
                 <div className={styles.tableNewAlert}>
-                   <button className={styles.newAlert} onClick={() => handleClickNewAlert()}>+New Alert</button></div> 
-              
+                   <ModalCreateAlert/>
+            
                    </div>
 
                     <div className={styles.configfooter}>
@@ -96,6 +95,8 @@ const handleClickNewAlert = () => {
 
                     </div>
                 </div>
+            </div>
+
             </div>
 
     );

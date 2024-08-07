@@ -44,7 +44,7 @@ function ModalCreateAlert() {
                 </div>
         </Modal>
 
-        <button onClick={() => handleVisibleModal(true)}>Open modal</button></>
+        <button className={styles.newAlert} onClick={() => handleVisibleModal(true)}>+ New Alert </button></>
     )
 }
 
