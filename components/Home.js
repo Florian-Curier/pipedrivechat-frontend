@@ -12,12 +12,12 @@ function Home() {
   const router = useRouter();
   const user = useSelector((state) => state.user.value)
 
-/*   useEffect(() => {
+  useEffect(() => {
     if(user.google_email && user.pipedrive_user_id) {
-      router.push('/alerts')
+      router.push('/dashboard')
     } 
  
-  },[router]) */
+  },[router]) 
 
   console.log(user)
 

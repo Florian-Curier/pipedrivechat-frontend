@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import Header from '../components/Header'
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import user from '../reducers/user';
@@ -27,8 +28,9 @@ function App({ Component, pageProps }) {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
       <Head>
-        <title>Next.js App</title>
+        <title>Pipedrive Chat</title>
       </Head>
+      <Header/>
       <Component {...pageProps} />
       </PersistGate>
     </Provider>
