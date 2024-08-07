@@ -1,8 +1,7 @@
-import ModalCreateAlert from '../components/ModalCreateAlert';
-// import Stats from '../components/Stats'
+import Stats from '../components/Stats'
 
 function StatsPage () {
-    return <ModalCreateAlert />
+    return <Stats />
 }
 
 export default StatsPage;
