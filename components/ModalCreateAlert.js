@@ -2,6 +2,7 @@ import styles from '../styles/ModalCreateAlert.module.css';
 import { Modal } from 'antd';
 import { useState } from 'react';
 import AlertInfosConfig from './AlertInfosConfig';
+import AlertMessageConfig from './AlertMessageConfig'
 
 function ModalCreateAlert() {
     const [modalVisible, setModalVisible] = useState(false)
@@ -33,7 +34,7 @@ function ModalCreateAlert() {
             {stage === 1 && <AlertInfosConfig updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
             
             {/* Florian il faut remplacer le composant AlertInfosConfig par le composant que tu vas créer */}
-            {stage === 2 && <AlertInfosConfig updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
+            {stage === 2 && <AlertMessageConfig updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
 
                 <div className={styles.checkpoint}>
                     <div className={`${styles.barre} bgGreen`}></div>
