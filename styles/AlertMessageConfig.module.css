@@ -1,89 +1,87 @@
-.footer{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    margin-top: 20px;
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .container {
-    width: auto;
-    margin:  auto;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    
-  }
-  
-  .editableDiv {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .messageSection, .detailsSection {
-    width: 48%;
-  }
-  
-  .messageLabel, .detailsLabel, .dataDealLabel {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: black;
-  }
-  
-  .messageInput {
-    width: 130%;
-    height: 150px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    border-radius: 4px;
-    background-color: white;
-  }
-  
-  .dataDeal {
-    margin-top: 20px;
-  }
-  
-  .dataDealInputs {
-    display: flex;
-    align-items: center;
-  }
-  
-  .dataDeal select {
-    margin-right: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 150px;
-  }
-  
-  .dataDeal button {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    
-  }
-  
-  .detailsValue p {
-    margin: 5px 0;
-   
-  }
-  
-  .detailsSection {
-    margin-left: 20%;
- }
+  width: auto;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
 
- .messageToggle {
+}
+
+.editableDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageSection,
+.detailsSection {
+  width: 48%;
+}
+
+.messageLabel,
+.detailsLabel,
+.dataDealLabel {
   display: block;
-    margin-bottom: 8px;
-    color: black;
- }
- 
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: black;
+}
 
+.messageInput {
+  width: 130%;
+  height: 150px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-radius: 4px;
+  background-color: white;
+}
 
- 
- 
+.dataDeal {
+  margin-top: 20px;
+}
+
+.dataDealInputs {
+  display: flex;
+  align-items: center;
+}
+
+.dataDeal select {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+}
+
+.dataDeal button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.detailsValue p {
+  margin: 5px 0;
+
+}
+
+.detailsSection {
+  margin-left: 20%;
+}
+
+.messageToggle {
+  display: block;
+  margin-bottom: 8px;
+  color: black;
+}

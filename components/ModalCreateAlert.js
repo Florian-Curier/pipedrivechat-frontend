@@ -6,7 +6,7 @@ import AlertMessageConfig from './AlertMessageConfig'
 
 function ModalCreateAlert() {
     const [modalVisible, setModalVisible] = useState(false)
-    const [newAlert, setNewAlert] = useState({alert_name: '', trigger_id: '', google_channel_id: ''})
+    const [newAlert, setNewAlert] = useState({alert_name: '', trigger: {}, google_channel_id: '', google_channel_name: ''})
     
     // Variable permettant de gérer l'état d'avancement de la création d'une alerte
     const [stage, setStage] = useState(1)
@@ -30,6 +30,8 @@ function ModalCreateAlert() {
 
     // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
     if(stage === 3){
+        // Créer l'objet new alert à envoyer dans le POST
+        // let createAlert = {}
         fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

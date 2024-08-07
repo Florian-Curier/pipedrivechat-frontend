@@ -3,26 +3,22 @@ import { useState, useRef } from "react";
 
 function AlertMessageConfig(props) {
   const [message, setMessage] = useState("");
-  const [value, setValue] = useState("");
+  const [label, setLabel] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(false);
-  const editableDivRef = useRef(null);
+  //const editableDivRef = useRef(null);
 
-  const handleMessageChange = (e) => {
-    setMessage(e.target.innerText);
-  };
-
-  const handleValueChange = (e) => {
-    setValue(e.target.value);
-  };
+  // const handleMessageChange = (e) => {
+  //   setMessage(e.target.innerText);
+  // };
 
   const handleToggleChange = () => {
     const newToggleState = !isToggleOn;
     setIsToggleOn(newToggleState);
     const toggleMessage = newToggleState ? "Toggle is on" : "";
     setMessage(toggleMessage);
-    if (editableDivRef.current) {
-      editableDivRef.current.innerText = toggleMessage;
-    }
+    // if (editableDivRef.current) {
+    //   editableDivRef.current.innerText = toggleMessage;
+    // }
   };
 
   const cancelStage = () => {
@@ -46,10 +42,11 @@ function AlertMessageConfig(props) {
           >
             {message}
           </div>
+
           <div className={styles.dataDeal}>
             <label className={styles.dataDealLabel}>Insert data deal</label>
             <div className={styles.dataDealInputs}>
-              <select value={value} onChange={handleValueChange}>
+              <select onChange={(e) => setLabel(e.target.value)}>
                 <option value="">Value</option>
               
               </select>
@@ -57,6 +54,7 @@ function AlertMessageConfig(props) {
             </div>
           </div>
         </div>
+
         <div className={styles.detailsSection}>
           <label className={styles.detailsLabel}>Details</label>
           <div className={styles.detailsValue}>
