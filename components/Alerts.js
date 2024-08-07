@@ -4,11 +4,17 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
+import { useSelector } from 'react-redux';
+
 
 function Alerts() {
-    const pipedriveCompanyId = 83476443;
-    const pipedriveUserId = 81722389;
+    const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+    const user = useSelector((state) => state.user.value);
+    const pipedriveCompanyId = user.pipedrive_company_id;
+    const pipedriveUserId = user.pipedrive_user_id;
     const [alertsList, setAlertsList] = useState([]);
+
+
 
     useEffect(() => {
         console.log('useeffect is running')
@@ -26,18 +32,17 @@ function Alerts() {
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/alerts/${pipedriveCompanyId}/${pipedriveUserId}`)
+        fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts/${pipedriveCompanyId}/${pipedriveUserId}`)
  .then(response => response.json())
  .then(alertData => {
 
-// console.log(alertData.alert[0].alert_name)
-// console.log(alertData.alert[0].trigger_id[" trigger_name"])
+
 setAlertsList([...alertData.alert]);
  });
 
     }, []);
 
-    // console.log(alertsList)
+    console.log(alertsList)
     // console.log(alertsList[0].trigger_id[" trigger_name"])
 
     const data = [
@@ -63,7 +68,7 @@ setAlertsList([...alertData.alert]);
                     <table>
     <thead>
       <tr>
-        <th>NAME</th>
+        <th className={styles.paddedelements}>NAME</th>
         <th>TRIGGER</th>
         <th>CHANNEL</th>
         <th>ACTION</th>
@@ -73,15 +78,15 @@ setAlertsList([...alertData.alert]);
       {alertsList.map((val, key) => {
                     return (
                         <tr key={key}>
-                            <td>{val.alert_name}</td>
+                            <td className={styles.paddedelements}>{val.alert_name}</td>
                             <td>{val.trigger_id[" trigger_name"]}</td>
-                            <td> </td>
+                            <td>#{val.google_channel_name}</td>
                             <td><FontAwesomeIcon icon={faPen} className={styles.edit} /><FontAwesomeIcon icon={faTrash} className={styles.delete}/></td>
                         </tr>
                     )
                 })}
       <tr>
-      <td><button>+New Alert</button></td>
+      <td className={styles.paddedelements}><button>+New Alert</button></td>
       <td> </td>
       <td> </td>
       <td> </td>
