@@ -1,0 +1,64 @@
+/* CSS commun */
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: white;
+    width: 350px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    background: none;
+}
+
+.message {
+    flex-grow: 1;  /*permet à l'élément de croitre pour occuper l'élément restant disponible dans le conteneur*/
+    text-align: center;
+}
+
+.closeButton {
+    background: none; /*supprime le fond du bouton */
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+/* CSS spécifique */
+
+.notificationValidation {
+    background-color: #067E21;
+}
+
+.notificationWarning {
+    background-color: #FF8C00;
+}
+
+.notificationDelete {
+    background-color: #CE0000;
+}
+
+.iconValidation {
+    color: #067E21;
+}
+
+.iconWarning {
+    color: #FF8C00;
+}
+
+.iconDelete {
+    color: #CE0000;
+}

@@ -1,5 +1,6 @@
 import styles from '../styles/Stats.module.css'
 
+
 function Stats() {
     return (
         <div className={styles.container}>
@@ -9,7 +10,7 @@ function Stats() {
             </div>
             
             {/* Ici il y aura le composant périod */}
-
+                        
             <div>
                 {/* La liste des composants charts */}
             </div>
