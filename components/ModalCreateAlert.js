@@ -1,10 +1,17 @@
 import styles from '../styles/ModalCreateAlert.module.css';
 import { Modal } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AlertInfosConfig from './AlertInfosConfig';
 import AlertMessageConfig from './AlertMessageConfig'
+import { useDispatch, useSelector } from 'react-redux';
+import { addAlertInStore } from '../reducers/alerts'
 
 function ModalCreateAlert() {
+    const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.user.value);
+
     const [modalVisible, setModalVisible] = useState(false)
     const [newAlert, setNewAlert] = useState({alert_name: '', trigger: {}, google_channel_id: '', google_channel_name: ''})
     
@@ -29,22 +36,36 @@ function ModalCreateAlert() {
     }
 
     // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
-    if(stage === 3){
-        // Créer l'objet new alert à envoyer dans le POST
-        // let createAlert = {}
-        fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-	        body: JSON.stringify(newAlert),
-        }).then(response => response.json()).then(data => {
-            if(data.result){
-                setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
-                handleVisibleModal(false)
-            } else {
-                console.log(data.error)
+    useEffect(() => {
+        if(stage === 3){
+            console.log(newAlert)
+            let createAlert = { 
+                alert_name: newAlert.alert_name, 
+                google_channel_id: newAlert.google_channel_id, 
+                google_channel_name: newAlert.google_channel_name, 
+                trigger_id: newAlert.trigger._id, 
+                trigger_name: newAlert.trigger.trigger_name, 
+                message: newAlert.message, 
+                pipedrive_user_id: user.pipedrive_user_id, 
+                pipedrive_company_id: user.pipedrive_company_id,
             }
-        })
-    }
+            
+            fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(createAlert),
+            }).then(response => response.json()).then(data => {
+                if(data.result){
+                    dispatch(addAlertInStore(data.alert))
+                    setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
+                    setStage(1)
+                    handleVisibleModal(false)
+                } else {
+                    console.log(data.error)
+                }
+            })
+        }
+    }, [stage])
 
     return (<>
         <Modal title="Create new alert" onCancel={() => handleVisibleModal(false)} visible={modalVisible} footer={null} >
