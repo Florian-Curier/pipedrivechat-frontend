@@ -2,10 +2,12 @@ import styles from "../styles/AlertMessageConfig.module.css";
 import { useState, useRef } from "react";
 
 function AlertMessageConfig(props) {
-  const defaultMessage = props.newAlert.trigger_id.default_message
   const [message, setMessage] = useState(props.newAlert.trigger_id.default_message);
   const [label, setLabel] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(true);
+
+  const defaultMessage = props.newAlert.trigger_id.default_message
+  const textareaRef = useRef(null);
   //const editableDivRef = useRef(null);
 
   // const handleMessageChange = (e) => {
@@ -34,6 +36,18 @@ function AlertMessageConfig(props) {
     props.updateNewAlert(newAlert);
   };
 
+  const insertLabelMessage = () => {
+    let insertLabel = `#${label}`
+    let cursorPosition = textareaRef.current.selectionStart
+    let textBeforeCursorPosition = message.substring(0, cursorPosition)
+    let textAfterCursorPosition = message.substring(cursorPosition, message.length)
+    let result = textBeforeCursorPosition + insertLabel + textAfterCursorPosition
+    console.log(textareaRef)
+    console.log(cursorPosition)
+    setMessage(result)
+
+  }
+
   let labelOptions = props.newAlert.trigger_id.labels.map((element, i) => <option key={i} value={element}>{element}</option>)
 
   return (
@@ -41,24 +55,26 @@ function AlertMessageConfig(props) {
       <div className={styles.editableDiv}>
         <div className={styles.messageSection}>
           <label className={styles.messageLabel}>* Message to send</label>
-          <div
+          <textarea
+            ref={textareaRef}
             className={styles.messageInput}
-            contentEditable={!isToggleOn}
+            disabled={isToggleOn}
             onChange={(e) => setMessage(e.target.value)}
+            value={message}
           >
-            {message}
-          </div>
+          </textarea>
 
           <div className={styles.dataDeal}>
             <label className={styles.dataDealLabel}>Insert data deal</label>
             <div className={styles.dataDealInputs}>
-              <select onChange={(e) => setLabel(e.target.value)}>
+              <select disabled={isToggleOn ? true : false} onChange={(e) => setLabel(e.target.value)}>
                 <option value="">Choose a label</option>
                 {labelOptions}
               </select>
-              <button className={styles.buttonInsert}>Insert</button>
+              <button disabled={isToggleOn ? true : false} className={styles.buttonInsert} onClick={() => insertLabelMessage()}>Insert</button>
             </div>
           </div>
+
         </div>
 
         <div className={styles.detailsSection}>
@@ -66,7 +82,7 @@ function AlertMessageConfig(props) {
           <div className={styles.detailsValue}>
             <p>{label}</p>
             {label !== "" && <div><p>____________________</p>
-            <p>____________________</p>
+            <p>________________________________________</p>
             <p>____________________</p></div>}
           </div>
         </div>
