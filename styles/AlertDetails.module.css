@@ -18,19 +18,33 @@
     cursor: pointer;
 }
 
+.backButton:hover{
+color: #37AFFF;
+}
+
 .infosBox{
     display: flex;
+    width: 100vw;
     justify-content: space-between;
-    margin: 20px 0px 20px 0px;
+    margin: 20px 10px 20px 10px;
 }
 
 .infosSubBox{
+    display: flex;
+    justify-content: flex-start;
     width: 100vw;
+}
+
+.infoBoxKeyname{
+    font-weight: 600;
+    margin-right: 10px;
 }
 
 .logsBox{
     display: flex;
     justify-content: space-between;
+    margin-right: 10px;
+    margin-left: 10px;
     border-top: 2px solid #DADADA;
 }
 
@@ -38,7 +52,6 @@
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    margin-right: 17px;
 }
 
 .logs{
@@ -53,12 +66,14 @@
 .logsItem{
     border-top: 1px solid black;
     display: flex;
+    height: 6vh;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 5px;
 }
 
 .logsSubItem{
-    width: 15vw;
+    width: 25vw;
     justify-content: center;
     text-align: center;
 }
