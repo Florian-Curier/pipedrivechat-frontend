@@ -27,3 +27,9 @@
     text-align: center;
     margin-top: 20px;
 }
+
+.required{
+    margin-left: 40px;
+    color: #D83C38;
+    font-style: italic;
+}

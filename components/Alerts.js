@@ -8,19 +8,20 @@ import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { updateAlertsInStore, deleteAlertInStore } from '../reducers/alerts'
+import { updateAlertsInStore } from '../reducers/alerts'
 
 function Alerts() {
     const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
     const user = useSelector((state) => state.user.value);
     const alerts = useSelector((state) => state.alerts.value);
+    
     const dispatch = useDispatch()
-
+    console.log("reducer: ", alerts)
     const router = useRouter()
 
     // const [alertsList, setAlertsList] = useState([]);
-    console.log(alerts)
+
     /* 
      useEffect(() => {
             const initializeSDK = async () => {
@@ -47,15 +48,14 @@ function Alerts() {
 
     }, []);
 
-    const alertsRows = alerts.map((val, key) => {
-        return (
-            <Alert key={key} id={val._id} name={val.alert_name} trigger={val.trigger_id.trigger_name} channel={val.google_channel_name} />
-        )
-    });
-
-    // const handleClickNewAlert = () => {
-    //     console.log('click new alert')
-    // }
+    let alertsRows = []
+    if(alerts){
+        let sortAlerts = [...alerts]
+        sortAlerts.sort((a,b) => {
+            return a.creation_date - b.creation_date
+        })
+        alertsRows = alerts.map((val, key) => <Alert key={key} alert={val} />);
+    }
 
     return (
         <div className={styles.container}>
@@ -81,7 +81,7 @@ function Alerts() {
                     </div>
 
                     <div className={styles.tableNewAlert}>
-                        <ModalCreateAlert />
+                        <ModalCreateAlert type="new" />
                     </div>
 
                     <div className={styles.configfooter}>

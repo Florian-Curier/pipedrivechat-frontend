@@ -4,16 +4,26 @@ import { useState, useEffect } from 'react';
 import AlertInfosConfig from './AlertInfosConfig';
 import AlertMessageConfig from './AlertMessageConfig'
 import { useDispatch, useSelector } from 'react-redux';
-import { addAlertInStore } from '../reducers/alerts'
+import { addAlertInStore, updateAlertInStore } from '../reducers/alerts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
-function ModalCreateAlert() {
+function ModalCreateAlert(props) {
     const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
-
+    console.log("props modal: ", props)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user.value);
 
     const [modalVisible, setModalVisible] = useState(false)
-    const [newAlert, setNewAlert] = useState({alert_name: '', trigger: {}, google_channel_id: '', google_channel_name: ''})
+    const [newAlert, setNewAlert] = useState({alert_name: '', trigger_id: {}, google_channel_id: '', google_channel_name: ''})
+    const modalUpdate = props.type === "update" ? true : false
+    
+    useEffect(() => {
+        console.log("props modal useEffect: ", props)
+        if(modalUpdate){
+            setNewAlert(props.alert)
+        }
+    }, [modalVisible])
     
     // Variable permettant de gérer l'état d'avancement de la création d'une alerte
     const [stage, setStage] = useState(1)
@@ -37,42 +47,69 @@ function ModalCreateAlert() {
 
     // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
     useEffect(() => {
-        if(stage === 3){
-            console.log(newAlert)
-            let createAlert = { 
-                alert_name: newAlert.alert_name, 
-                google_channel_id: newAlert.google_channel_id, 
-                google_channel_name: newAlert.google_channel_name, 
-                trigger_id: newAlert.trigger._id, 
-                trigger_name: newAlert.trigger.trigger_name, 
-                message: newAlert.message, 
-                pipedrive_user_id: user.pipedrive_user_id, 
-                pipedrive_company_id: user.pipedrive_company_id,
-            }
-            
-            fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(createAlert),
-            }).then(response => response.json()).then(data => {
-                if(data.result){
-                    dispatch(addAlertInStore(data.alert))
-                    setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
-                    setStage(1)
-                    handleVisibleModal(false)
-                } else {
-                    console.log(data.error)
+        if(stage === 3){            
+            if(modalUpdate){
+                let updateAlert = { 
+                    alert_id: newAlert._id,
+                    alert_name: newAlert.alert_name, 
+                    google_channel_id: newAlert.google_channel_id, 
+                    google_channel_name: newAlert.google_channel_name, 
+                    trigger_id: newAlert.trigger_id._id, 
+                    trigger_name: newAlert.trigger_id.trigger_name, 
+                    message: newAlert.message, 
+                    pipedrive_user_id: user.pipedrive_user_id, 
+                    pipedrive_company_id: user.pipedrive_company_id,
                 }
-            })
+
+                fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updateAlert),
+                }).then(response => response.json()).then(data => {
+                    if(data.result){
+                        dispatch(updateAlertInStore(newAlert))
+                        setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
+                        setStage(1)
+                        handleVisibleModal(false)
+                    } else {
+                        console.log(data.error)
+                    }
+                })
+            } else {
+                let createAlert = { 
+                    alert_name: newAlert.alert_name, 
+                    google_channel_id: newAlert.google_channel_id, 
+                    google_channel_name: newAlert.google_channel_name, 
+                    trigger_id: newAlert.trigger_id._id, 
+                    trigger_name: newAlert.trigger_id.trigger_name, 
+                    message: newAlert.message, 
+                    pipedrive_user_id: user.pipedrive_user_id, 
+                    pipedrive_company_id: user.pipedrive_company_id,
+                }
+
+                fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(createAlert),
+                }).then(response => response.json()).then(data => {
+                    if(data.result){
+                        dispatch(addAlertInStore(data.newAlert))
+                        setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
+                        setStage(1)
+                        handleVisibleModal(false)
+                    } else {
+                        console.log(data.error)
+                    }
+                })
+            }
         }
     }, [stage])
 
     return (<>
-        <Modal title="Create new alert" onCancel={() => handleVisibleModal(false)} visible={modalVisible} footer={null} >
-            {stage === 1 && <AlertInfosConfig updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
+        <Modal title={modalUpdate ? "Update alert" : "Create new alert"} onCancel={() => handleVisibleModal(false)} visible={modalVisible} footer={null} >
+            {stage === 1 && <AlertInfosConfig key={props.id ? props.id: ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
             
-            {/* Florian il faut remplacer le composant AlertInfosConfig par le composant que tu vas créer */}
-            {stage === 2 && <AlertMessageConfig updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
+            {stage === 2 && <AlertMessageConfig key={props.id ? props.id: ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
 
                 <div className={styles.checkpoint}>
                     <div className={`${styles.barre} bgGreen`}></div>
@@ -82,7 +119,9 @@ function ModalCreateAlert() {
                 </div>
         </Modal>
 
-        <button className={styles.newAlert} onClick={() => handleVisibleModal(true)}>+ New Alert </button></>
+        {modalUpdate && <FontAwesomeIcon icon={faPen} className={styles.edit} onClick={() => handleVisibleModal(true)} />}
+        {!modalUpdate && <button className={styles.newAlert} onClick={() => handleVisibleModal(true)}>+ New Alert </button>}
+    </>
     )
 }
 

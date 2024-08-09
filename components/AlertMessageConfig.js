@@ -2,8 +2,8 @@ import styles from "../styles/AlertMessageConfig.module.css";
 import { useState, useRef } from "react";
 
 function AlertMessageConfig(props) {
-  const defaultMessage = props.newAlert.trigger.default_message
-  const [message, setMessage] = useState(props.newAlert.trigger.default_message);
+  const defaultMessage = props.newAlert.trigger_id.default_message
+  const [message, setMessage] = useState(props.newAlert.trigger_id.default_message);
   const [label, setLabel] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(true);
   //const editableDivRef = useRef(null);
@@ -34,7 +34,7 @@ function AlertMessageConfig(props) {
     props.updateNewAlert(newAlert);
   };
 
-  let labelOptions = props.newAlert.trigger.labels.map((element, i) => <option key={i} value={element}>{element}</option>)
+  let labelOptions = props.newAlert.trigger_id.labels.map((element, i) => <option key={i} value={element}>{element}</option>)
 
   return (
     <div className={styles.container}>

@@ -15,11 +15,18 @@ export const userSlice = createSlice({
         addAlertInStore: (state, action) => {
             state.value.push(action.payload)
         },
+        updateAlertInStore: (state, action) => {
+            
+            let data = state.value.filter(alert => alert._id !== action.payload._id)
+            data.push(action.payload)
+            state.value = data
+            console.log(data)
+        },
         deleteAlertInStore: (state, action) => {
             state.value = state.value.filter(alert => alert._id !== action.payload)
         },
     },
 });
 
-export const { updateAlertsInStore, addAlertInStore, deleteAlertInStore } = userSlice.actions;
+export const { updateAlertsInStore, addAlertInStore, updateAlertInStore, deleteAlertInStore } = userSlice.actions;
 export default userSlice.reducer;
