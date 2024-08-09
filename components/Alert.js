@@ -4,13 +4,17 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deleteAlertInStore } from '../reducers/alerts'
 import { useDispatch } from 'react-redux';
 import ModalCreateAlert from './ModalCreateAlert';
+import { useRouter } from 'next/router';
 
 function Alert(props) {
+
     const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+    const router = useRouter()
     const dispatch = useDispatch()
     
     const handleClickAlertDetails = () => {
-        console.log('click see alert details')
+        router.push(`/alert-details?alert_id=${props.alert._id}`)
+        
     }
 
     const handleClickDeleteAlert = () => {

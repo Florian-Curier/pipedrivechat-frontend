@@ -14,7 +14,7 @@ function Home() {
 
   useEffect(() => {
     if(user.google_email && user.pipedrive_user_id) {
-      router.push('/dashboard')
+      router.push('/alerts')
     } 
  
   },[router]) 
@@ -31,8 +31,8 @@ function Home() {
         <h1 className={styles.title}>
           Welcome to Pipedrivechat
         </h1>
-        <span> It seems the app is not fully installed yet, click below to continue </span>
-        <button onClick={() => handleClick()}> Resume installation</button>
+        <p> You need to login to Pipedrive and Google to authorize Pipedrivechat app to send messages </p>
+        <button className='btn bgGreen' onClick={() => handleClick()}> Login</button>
       </div>
   );
 }

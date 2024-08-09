@@ -44,7 +44,7 @@ useEffect(() => {
 
 
 const handleClick = () => {
-    router.push('/') // REDIRECTION VERS HOME
+    router.push('/alerts') // REDIRECTION VERS HOME
     // router.push(`${domain}/settings/marketplace/app/${client_id}/app-settings`) // REDIRECION VERS L'IFRAME
 }
 
@@ -56,8 +56,8 @@ const handleClick = () => {
     <div className={styles.container}>
         <h1 className={styles.title}> Congratulations {user?.user_name} !</h1>
         <span>Installation Complete wiht your google accout {user.google_email} </span>
-        <span>You can now configure your alerts</span>
-        <button onClick={ () => handleClick()}>Back to Pipedrive</button>
+        <span>You can now configure your alerts in our program</span>
+        <button className='btn bgGreen' onClick={ () => handleClick()}>Start </button>
     </div>
   );
 }

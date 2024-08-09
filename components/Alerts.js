@@ -38,6 +38,12 @@ function Alerts() {
         }, []); */
 
     useEffect(() => {
+            if(!user.google_email && !user.pipedrive_user_id) {
+              router.push('/')
+            } 
+          },[router]) 
+
+    useEffect(() => {
         fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts/${user?.pipedrive_company_id}/${user?.pipedrive_user_id}`)
             .then(response => response.json())
             .then(alertData => {
@@ -60,6 +66,8 @@ function Alerts() {
     return (
         <div className={styles.container}>
             <div className={styles.configcontent}>
+
+                <div>
                 <div className={styles.configheading}>
 
                     <h2 className={styles.maintitle}>Configure my alerts</h2>
@@ -83,15 +91,16 @@ function Alerts() {
                     <div className={styles.tableNewAlert}>
                         <ModalCreateAlert type="new" />
                     </div>
-
-                    <div className={styles.configfooter}>
+                    </div>
+                   
+                </div>
+                <div className={styles.configfooter}>
                         <div className={styles.helpsection}>
                             <p className={styles.helptext}>Need Help</p>
                             <FontAwesomeIcon icon={faCircleQuestion} className={styles.helpicon} />
                         </div>
 
                     </div>
-                </div>
             </div>
         </div>
     );
