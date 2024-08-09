@@ -1,5 +1,5 @@
 import styles from "../styles/AlertMessageConfig.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function AlertMessageConfig(props) {
   const [message, setMessage] = useState(props.newAlert.trigger_id.default_message);
@@ -13,6 +13,17 @@ function AlertMessageConfig(props) {
   // const handleMessageChange = (e) => {
   //   setMessage(e.target.innerText);
   // };
+
+  // Si Modification d'une alerte, nous chargons ses données
+  useEffect(() => {
+      if(props.newAlert.message){
+        setMessage(props.newAlert.message)
+        setIsToggleOn(false)
+      } else {
+        setMessage(props.newAlert.trigger_id.default_message)
+        setIsToggleOn(true)
+      }
+  },[])
 
   const handleToggleChange = () => {
     setIsToggleOn(!isToggleOn);
@@ -37,7 +48,7 @@ function AlertMessageConfig(props) {
   };
 
   const insertLabelMessage = () => {
-    let insertLabel = `#${label}`
+    let insertLabel = `#${label}#`
     let cursorPosition = textareaRef.current.selectionStart
     let textBeforeCursorPosition = message.substring(0, cursorPosition)
     let textAfterCursorPosition = message.substring(cursorPosition, message.length)
