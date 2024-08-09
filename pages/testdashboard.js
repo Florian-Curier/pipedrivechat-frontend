@@ -4,7 +4,7 @@ import Chart from '../components/Chart';
 
 
 
-function DashboardPage () {
+function TestDashboardPage () {
     const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
     const pipedriveCompanyId = 13476443;
     const pipedriveUserId = 21669270;
@@ -212,4 +212,4 @@ function DashboardPage () {
       );
 }
 
-export default DashboardPage;
+export default TestDashboardPage;
