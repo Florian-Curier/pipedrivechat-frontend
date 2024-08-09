@@ -2,6 +2,7 @@ import styles from '../styles/Alerts.module.css'
 import AppExtensionsSDK, { Command } from "@pipedrive/app-extensions-sdk";
 import Alert from './Alert';
 import ModalCreateAlert from './ModalCreateAlert';
+import ModalHelp from './ModalHelp';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -96,10 +97,11 @@ function Alerts() {
                 </div>
                 <div className={styles.configfooter}>
                         <div className={styles.helpsection}>
-                            <p className={styles.helptext}>Need Help</p>
-                            <FontAwesomeIcon icon={faCircleQuestion} className={styles.helpicon} />
+                            {/* <p className={styles.helptext}>Need Help</p>
+                            <FontAwesomeIcon icon={faCircleQuestion} className={styles.helpicon} /> */}
+                            <ModalHelp />
                         </div>
-
+                       
                     </div>
             </div>
         </div>
