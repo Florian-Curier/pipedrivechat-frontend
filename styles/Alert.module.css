@@ -65,12 +65,3 @@
   .delete :hover {
     color: black;
   }
-  
-  .edit {
-    cursor: pointer;
-    color: gray;
-  }
-
-  .edit :hover {
-    color: black;
-  }

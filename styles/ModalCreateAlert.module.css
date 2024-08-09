@@ -41,3 +41,12 @@
     text-decoration: underline;
   
   }
+
+  .edit {
+    cursor: pointer;
+    color: gray;
+  }
+
+  .edit :hover {
+    color: black;
+  }

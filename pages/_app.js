@@ -11,7 +11,8 @@ import storage from 'redux-persist/lib/storage'
 
 
 const reducers = combineReducers({ user, alerts })
-const persistConfig = { key: 'pipedrivechat', storage};
+const persistConfig = { key: 'pipedrivechat', storage, blacklist: ['alerts']}
+
 
 const store = configureStore({
   reducer:  persistReducer(persistConfig, reducers),
