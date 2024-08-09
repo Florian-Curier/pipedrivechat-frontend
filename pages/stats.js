@@ -1,9 +1,11 @@
 import Stats from '../components/Stats'
-import Notification from '../components/Notification';
+import ModaleHelp from '../components/ModalHelp';
+
 
 
 function StatsPage () {
-    return <Stats />
+    // return <Stats />
+return <ModaleHelp />
 }
 
 export default StatsPage;
