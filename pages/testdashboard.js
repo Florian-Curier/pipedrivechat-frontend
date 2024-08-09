@@ -1,75 +1,187 @@
-import { useState } from "react";
-import BarChart from '../components/BarChart';
+import { useState, useEffect } from "react";
 import Chart from '../components/Chart';
 
 
 
 
 function TestDashboardPage () {
+    const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+    const pipedriveCompanyId = 13476443;
+    const pipedriveUserId = 21669270;
+    // const pipedriveCompanyId = user.pipedrive_company_id;
+    // const pipedriveUserId = user.pipedrive_user_id;
+    const [dealData, setDealData] = useState([]);
 
-    const dealData = [
-        {
-            id: 1,
-            wonDate: "2024-05-20",
-            value: 80000,
-        },
-        {
-            id: 2,
-            wonDate: "2024-07-20",
-            value: 80000,
-        },
-        {
-            id: 3,
-            wonDate: "2024-08-01",
-            value: 55000,
-        },
-        {
-            id: 4,
-            wonDate: "2024-08-05",
-            value: 72000,
-        },
-        {
-            id: 5,
-            wonDate: "2024-08-10",
-            value: 69000,
-        },
-        {
-            id: 6,
-            wonDate: "2024-08-15",
-            value: 85000,
-        },
-        {
-            id: 7,
-            wonDate: "2024-08-20",
-            value: 78000,
-        },
-        {
-            id: 8,
-            wonDate: "2024-08-25",
-            value: 60000,
-        },
-        {
-            id: 9,
-            wonDate: "2024-08-30",
-            value: 90000,
-        },
-    ];
+    // const dealData =  [
+    //     {
+    //     "id": 1,
+    //     "title": "BigCompany deal",
+    //     "creator_user_id": 21180837,
+    //     "value": 5000,
+    //     "person_id": 1,
+    //     "org_id": 1,
+    //     "stage_id": 1,
+    //     "currency": "USD",
+    //     "add_time": "2024-05-20T23:03:45Z",
+    //     "update_time": "2024-05-21T02:32:08Z",
+    //     "status": "won",
+    //     "probability": null,
+    //     "lost_reason": null,
+    //     "visible_to": 3,
+    //     "close_time": "2024-05-21T02:32:08Z",
+    //     "pipeline_id": 1,
+    //     "won_time": "2024-05-21T02:32:08Z",
+    //     "lost_time": null,
+    //     "stage_change_time": null,
+    //     "local_won_date": "2024-05-20",
+    //     "local_lost_date": null,
+    //     "local_close_date": "2024-05-20",
+    //     "expected_close_date": null,
+    //     "custom_fields": null,
+    //     "owner_id": 21180837,
+    //     "label_ids": [],
+    //     "is_deleted": false,
+    //     "origin": "ManuallyCreated",
+    //     "origin_id": null,
+    //     "channel": null,
+    //     "channel_id": null
+    //     },
+    //     {
+    //     "id": 2,
+    //     "title": "MediumCompany deal",
+    //     "creator_user_id": 21180837,
+    //     "value": 0,
+    //     "person_id": 2,
+    //     "org_id": 2,
+    //     "stage_id": 1,
+    //     "currency": "USD",
+    //     "add_time": "2024-05-20T23:15:29Z",
+    //     "update_time": "2024-05-20T23:15:38Z",
+    //     "status": "won",
+    //     "probability": null,
+    //     "lost_reason": null,
+    //     "visible_to": 3,
+    //     "close_time": "2024-05-20T23:15:38Z",
+    //     "pipeline_id": 1,
+    //     "won_time": "2024-05-20T23:15:38Z",
+    //     "lost_time": null,
+    //     "stage_change_time": null,
+    //     "local_won_date": "2024-05-20",
+    //     "local_lost_date": null,
+    //     "local_close_date": "2024-05-20",
+    //     "expected_close_date": null,
+    //     "custom_fields": null,
+    //     "owner_id": 21180837,
+    //     "label_ids": [],
+    //     "is_deleted": false,
+    //     "origin": "ManuallyCreated",
+    //     "origin_id": null,
+    //     "channel": null,
+    //     "channel_id": null
+    //     },
+    //     {
+    //     "id": 1,
+    //     "title": "BigCompany deal",
+    //     "creator_user_id": 21180837,
+    //     "value": 0,
+    //     "person_id": 1,
+    //     "org_id": 1,
+    //     "stage_id": 1,
+    //     "currency": "USD",
+    //     "add_time": "2024-05-20T23:03:45Z",
+    //     "update_time": "2024-05-21T02:32:08Z",
+    //     "status": "won",
+    //     "probability": null,
+    //     "lost_reason": null,
+    //     "visible_to": 3,
+    //     "close_time": "2024-05-21T02:32:08Z",
+    //     "pipeline_id": 1,
+    //     "won_time": "2024-05-21T02:32:08Z",
+    //     "lost_time": null,
+    //     "stage_change_time": null,
+    //     "local_won_date": "2024-05-20",
+    //     "local_lost_date": null,
+    //     "local_close_date": "2024-05-20",
+    //     "expected_close_date": null,
+    //     "custom_fields": null,
+    //     "owner_id": 21180837,
+    //     "label_ids": [],
+    //     "is_deleted": false,
+    //     "origin": "ManuallyCreated",
+    //     "origin_id": null,
+    //     "channel": null,
+    //     "channel_id": null
+    //     },
+    //     {
+    //     "id": 2,
+    //     "title": "MediumCompany deal",
+    //     "creator_user_id": 21180837,
+    //     "value": 0,
+    //     "person_id": 2,
+    //     "org_id": 2,
+    //     "stage_id": 1,
+    //     "currency": "USD",
+    //     "add_time": "2024-05-20T23:15:29Z",
+    //     "update_time": "2024-05-20T23:15:38Z",
+    //     "status": "won",
+    //     "probability": null,
+    //     "lost_reason": null,
+    //     "visible_to": 3,
+    //     "close_time": "2024-05-20T23:15:38Z",
+    //     "pipeline_id": 1,
+    //     "won_time": "2024-05-20T23:15:38Z",
+    //     "lost_time": null,
+    //     "stage_change_time": null,
+    //     "local_won_date": "2024-05-20",
+    //     "local_lost_date": null,
+    //     "local_close_date": "2024-05-20",
+    //     "expected_close_date": null,
+    //     "custom_fields": null,
+    //     "owner_id": 21180837,
+    //     "label_ids": [],
+    //     "is_deleted": false,
+    //     "origin": "ManuallyCreated",
+    //     "origin_id": null,
+    //     "channel": null,
+    //     "channel_id": null
+    //     }
+    //     ];
 
     const startDate = new Date("2024-05-20");
     const endDate = new Date("2024-08-30");
-    
-    const filteredDealData = dealData.filter(deal => {
-        const date = new Date(deal.wonDate);
-        return date >= startDate && date <= endDate;
-    });
-    
-    console.log(filteredDealData);
-    
-    console.log(filteredDealData);
+    const timeUnit = 'month';
+
+        useEffect(() => {
+
+            const fetchDealsData = async () => {
+
+              const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/dashboard/turnover/${pipedriveCompanyId}/${pipedriveUserId}/${startDate}/${endDate}/${timeUnit}`);
+              const routeDealsData = await response.json();
+        //   console.log(routeDealsData.deals)
+              setDealData([...routeDealsData.deals]);
+
+            }
+          
+            fetchDealsData()
+
+              .catch(console.error);;
+          }, [])
+
+        //   console.log(dealData)
 
 
-    const [dealsData, setDealsData] = useState({
-        labels: filteredDealData.map((data) => data.wonDate),
+    
+    const filteredDealData = dealData
+    
+    // .filter(deal => {
+    //     const date = new Date(deal.local_won_date);
+    //     return date >= startDate && date <= endDate;
+    // });
+    // console.log(filteredDealData)
+
+
+    const dealsData = {
+        labels: filteredDealData.map((data) => data.won_time),
         datasets: [
           {
             label: "Turnover",
@@ -85,14 +197,16 @@ function TestDashboardPage () {
             borderWidth: 2,
           },
         ],
-      });
+      };
+
+      console.log(dealsData)
     
       
     
       return (
         <div className="App">
           <div style={{ width: 700 }}>
-            <Chart chartData={dealsData} chartType ='Pie' />
+            <Chart chartData={dealsData} chartType ='Bar' />
           </div>
         </div>
       );
