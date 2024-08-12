@@ -1,4 +1,5 @@
 import styles from '../styles/Stats.module.css'
+import DateFilters from './DateFilters';
 
 
 function Stats() {
@@ -6,10 +7,10 @@ function Stats() {
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1>Usage statistics</h1>
-                <p>Visualize statistics about your usage of the app</p>
+                <span>Visualize statistics about your usage of the app</span>
             </div>
             
-            {/* Ici il y aura le composant périod */}
+            <DateFilters/>
                         
             <div>
                 {/* La liste des composants charts */}
