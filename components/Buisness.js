@@ -147,7 +147,7 @@ function Buisness() {
     //     }
     //     ];
 
-    const startDate = new Date("2024-05-20");
+    const startDate = new Date("2024-01-01");
     const endDate = new Date("2024-08-30");
     const timeUnit = 'month';
 
@@ -200,7 +200,7 @@ function Buisness() {
       return (
         <div className="App">
           <div style={{ width: 700 }}>
-            <Chart chartData={dealsData} chartType ='Bar' />
+            <Chart chartData={dealsData} chartType='Bar' chartTitle='Turnover' />
           </div>
         </div>
       );
