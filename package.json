@@ -15,7 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@pipedrive/app-extensions-sdk": "^0.10.2",
     "@reduxjs/toolkit": "^2.2.7",
-    "antd": "^5.20.0",
+    "antd": "4.24.7",
     "chartjs": "^0.3.24",
     "dotenv": "^16.4.5",
     "next": "12.1.6",
