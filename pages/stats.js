@@ -1,11 +1,11 @@
 import Stats from '../components/Stats'
-import ModaleHelp from '../components/ModalHelp';
-
+import Header from '../components/Header'
 
 
 function StatsPage () {
     // return <Stats />
-return <ModaleHelp />
+    return <Header /> 
+
 }
 
 export default StatsPage;
