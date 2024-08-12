@@ -1,11 +1,10 @@
 import Stats from '../components/Stats'
-import ModaleHelp from '../components/ModalHelp';
 
 
 
 function StatsPage () {
-    // return <Stats />
-return <ModaleHelp />
+
+return <Stats />
 }
 
 export default StatsPage;
