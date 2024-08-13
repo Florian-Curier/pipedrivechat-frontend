@@ -79,10 +79,12 @@ function Stats() {
                 setEndDate('null')
             }
 
+            if(alertId){
             const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/alert/${alertId}/${startDate}/${endDate}/${displayType}`)
             const data = await response.json()
             
             setMessagesByAlert(data.messages)
+            }
         })()
     }, [startDate, endDate, displayType, alertId])
 
@@ -125,10 +127,12 @@ function Stats() {
                 setEndDate('null')
             }
 
-            const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/channel/${channelId}/${startDate}/${endDate}/${displayType}`)
-            const data = await response.json()
+            if(channelId){
+                const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/channel/${channelId}/${startDate}/${endDate}/${displayType}`)
+                const data = await response.json()
 
-            setMessagesByChannel(data.messages)
+                setMessagesByChannel(data.messages)
+            }
         })()
     }, [startDate, endDate, displayType, channelId])
 
@@ -136,13 +140,13 @@ function Stats() {
     // Création de la liste déroulante pour les alertes
     let alertsData = []
     if(alertsList){
-        alertsData = alertsList.map(alert => <option value={alert._id}>{alert.alert_name}</option>)
+        alertsData = alertsList.map((alert, i) => <option key={i} value={alert._id}>{alert.alert_name}</option>)
     }
 
     // Création de la liste déroulante pour les channels
     let channelsData = []
     if(channelsList){
-        channelsData = channelsList.map(channel => <option value={channel.name.slice(7)}>{channel.displayName}</option>)
+        channelsData = channelsList.map((channel, i) => <option key={i} value={channel.name.slice(7)}>{channel.displayName}</option>)
     }
 
     return (
