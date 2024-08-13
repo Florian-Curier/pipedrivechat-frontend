@@ -147,9 +147,9 @@ function Buisness() {
     //     }
     //     ];
 
-    const startDate = new Date("2024-01-01");
+    const startDate = new Date("2024-06-01");
     const endDate = new Date("2024-08-30");
-    const timeUnit = 'month';
+    const timeUnit = 'week';
 
         useEffect(() => {
 
