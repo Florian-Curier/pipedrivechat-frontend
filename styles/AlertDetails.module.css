@@ -42,16 +42,20 @@ color: #37AFFF;
 
 .logsBox{
     display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 7vh;
     justify-content: space-between;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 15px ;
+    padding-right: 80px;
     border-top: 2px solid #DADADA;
 }
 
 .logsListTitle{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     font-weight: bold;
+    border-bottom: 2px solid #DADADA;
 }
 
 .logs{
@@ -64,16 +68,34 @@ color: #37AFFF;
 }
 
 .logsItem{
-    border-top: 1px solid black;
+    border-bottom: 1px solid #DADADA;
+    align-items: center;
     display: flex;
     height: 6vh;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 5px;
+}
+
+.reactionLabel {
+    height: 1vh;
 }
 
 .logsSubItem{
     width: 25vw;
     justify-content: center;
     text-align: center;
+}
+
+.reactions{
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.emojis{
+    display: flex;
+    height: 1vh;
+
 }
