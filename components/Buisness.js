@@ -171,11 +171,14 @@ function Buisness() {
 
 
     
-    const filteredDealData = dealData
+    let  filteredDealData = dealData.map((data) => {
+      data.time = data.won_time
+      return data
+    })
 
 
     const dealsData = {
-        labels: filteredDealData.map((data) => data.won_time),
+        labels: filteredDealData.map((data) => data.time = data.won_time),
         datasets: [
           {
             label: "Turnover",
@@ -200,7 +203,7 @@ function Buisness() {
       return (
         <div className="App">
           <div style={{ width: 700 }}>
-            <Chart chartData={dealsData} chartType='Bar' chartTitle='Turnover' />
+            <Chart chartData={filteredDealData} chartType='Bar' chartTitle='Turnover' />
           </div>
         </div>
       );
