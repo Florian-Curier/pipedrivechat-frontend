@@ -158,11 +158,11 @@ function Stats() {
 
             <div className={styles.containerPie}>
                 <div>
-                    {messagesByAllAlert !== null && <Chart label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' />}
+                    {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' />}
                 </div>
 
                 <div>
-                    {messagesByAllChannel !== null && <Chart label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' />}
+                    {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' />}
                 </div>
             </div>
 
@@ -184,21 +184,21 @@ function Stats() {
 
             <div className={styles.containerBar}>
                 <div>
-                    {allMessages !== null && <Chart label="Messages" chartData={allMessages} chartType='Bar' chartTitle='All messages' />}
+                    {allMessages !== null && <Chart send={false} label="Messages" chartData={allMessages} chartType='Bar' chartTitle='All messages' />}
                 </div>
 
                 <div>
                     <select value={alertId} className={styles.keyValue} onChange={(e) => setAlertId(e.target.value)}>
                         {alertsData}
                     </select>
-                    {messagesByAlert !== null && <Chart label="Messages" chartData={messagesByAlert} chartType='Bar' chartTitle='Messages by alert' />}
+                    {messagesByAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAlert} chartType='Bar' chartTitle='Messages by alert' />}
                 </div>
 
                 <div>
                     <select value={channelId} className={styles.keyValue} onChange={(e) => setChannelId(e.target.value)}>
                         {channelsData}
                     </select>
-                    {messagesByChannel !== null && <Chart label="Messages" chartData={messagesByChannel} chartType='Bar' chartTitle='Messages by channel' />}
+                    {messagesByChannel !== null && <Chart send={false} label="Messages" chartData={messagesByChannel} chartType='Bar' chartTitle='Messages by channel' />}
                 </div>
             </div>
         </div>

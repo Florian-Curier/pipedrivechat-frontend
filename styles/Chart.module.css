@@ -1,0 +1,23 @@
+.container{
+    text-align: center;
+
+}
+
+.sendGraph{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.sendGraph select{
+    margin-right: 20px;
+}
+
+.sendGraph span{
+    margin-right: 10px;
+}
+
+.sendGraph button{
+    width: 160px;
+}

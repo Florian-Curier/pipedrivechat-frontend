@@ -203,7 +203,7 @@ function Buisness() {
       return (
         <div className="App">
           <div style={{ width: 700 }}>
-            <Chart chartData={filteredDealData} chartType='Bar' chartTitle='Turnover' />
+            <Chart send={true} chartData={filteredDealData} chartType='Bar' chartTitle='Turnover' />
           </div>
         </div>
       );
