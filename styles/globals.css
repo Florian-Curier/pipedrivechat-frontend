@@ -18,10 +18,10 @@ body {
 
 .btn{
   padding: 8px 12px 8px 12px;
-  border-radius: 8px;
+  border-radius: 8px ;
   border: none;
   color: white;
-  width: 80px;
+  width: 80px ;
   cursor: pointer;
 }
 
@@ -36,11 +36,11 @@ body {
 }
 
 .bgRed{
-  background-color: #D83C38;
+  background-color: #D83C38 ;
 }
 
 .bgGreen{
-  background-color: #2D8647;
+  background-color: #2D8647 ;
 }
 
 .bgGray{
@@ -106,3 +106,13 @@ input:checked + .slider:before {
 .toggle {
   margin-top: 3%;
 }
+
+.modalParagraph {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+
