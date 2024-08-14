@@ -1,4 +1,4 @@
-import Business from '../components/Buisness';
+import Business from '../components/Business';
 
 
 
