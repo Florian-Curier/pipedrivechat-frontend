@@ -109,7 +109,8 @@ function Stats() {
                 if(data.messages[0]){
                     dataValue = data.messages[0].value
                 }
-                dataGraph.push({title: element.displayName, value: dataValue})
+                if (dataValue > 0){
+                dataGraph.push({title: element.displayName, value: dataValue})}
             }
             
             setMessagesByAllChannel(dataGraph)
