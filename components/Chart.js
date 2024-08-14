@@ -1,4 +1,4 @@
-import { Chart as ChartJS } from "chart.js/auto";
+import { Chart as ChartJS } from "chart.js/auto"; // Ne surtout pas enlever
 import React, { useEffect, useState } from "react";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { useRef } from "react";
@@ -33,13 +33,22 @@ function Chart(props) {
         labels: props.chartData.map((data) => data[labelTitle]),
         datasets: [
             {
-                label: props.label,
+                
                 data: props.chartData.map((data) => data.value),
                 backgroundColor: backgroundColorTab.slice(0, props.chartData.length),
                 borderColor: "grey",
                 borderWidth: 2,
             },
         ],
+    };
+
+    // Option pour le chart Bar afin de ne pas afficher le label
+    const chartOptions = {
+        plugins: {
+            legend: {
+                display: false, // Désactive l'affichage de la légende
+            },
+        },
     };
 
     
@@ -93,7 +102,7 @@ function Chart(props) {
     return (
         <div className={styles.container}> 
             <h2>{props.chartTitle}</h2>
-            <Bar ref={chartRef} data={messagesData} type={props.chartType} /> 
+            <Bar ref={chartRef} data={messagesData} type={props.chartType} options={chartOptions} /> 
             {props.send && 
                 <div className={styles.sendGraph}>
                     <span>Channel : </span>
