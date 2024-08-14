@@ -27,13 +27,12 @@ function Chart(props) {
     if(props.chartType === "Pie"){
         labelTitle = 'title'
     }
-
+    console.log("chart: ", labelTitle)
     // Construction de l'objet attendu par le chart
     const messagesData = {
         labels: props.chartData.map((data) => data[labelTitle]),
         datasets: [
             {
-                
                 data: props.chartData.map((data) => data.value),
                 backgroundColor: backgroundColorTab.slice(0, props.chartData.length),
                 borderColor: "grey",
@@ -65,7 +64,7 @@ function Chart(props) {
             const data = await response.json()
             
             setChannelsList(data.channels)
-            setChannelId(data.channels[0].name.slice(7))
+            setChannelId(data?.channels[0].name.slice(7))
         })()
     },[])
 
