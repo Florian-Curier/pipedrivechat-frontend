@@ -24,8 +24,10 @@ function Alert(props) {
         }).then(response => response.json()).then(data => {
             if(data.result){
                 dispatch(deleteAlertInStore(props.alert._id))
+                props.handleNotificationInfo('validation', `Success, your alert was successfully deleted`)
             } else {
                 console.log(data)
+                props.handleNotificationInfo('delete', `Failure, your alert couldn't be deleted`)
             }
         })
     }

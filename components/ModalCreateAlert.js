@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addAlertInStore, updateAlertInStore } from '../reducers/alerts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import Notification from './Notification';
 
 function ModalCreateAlert(props) {
     const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
     console.log("props modal: ", props)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user.value);
+    const [notificationInfo, setNotificationInfo] = useState(null)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [newAlert, setNewAlert] = useState({alert_name: '', trigger_id: {}, google_channel_id: '', google_channel_name: ''})
@@ -45,6 +47,10 @@ function ModalCreateAlert(props) {
         colorStage = 'bgGreen'
     }
 
+    function handleNotificationInfo(type, message) {
+        setNotificationInfo( {type, message })
+            }
+
     // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
     useEffect(() => {
         if(stage === 3){            
@@ -71,8 +77,12 @@ function ModalCreateAlert(props) {
                         setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
                         setStage(1)
                         handleVisibleModal(false)
+                        handleNotificationInfo('validation', `Success, your alert was successfully updated`)
+                        
                     } else {
                         console.log(data.error)
+                        handleNotificationInfo('delete', `Failure, your alert couldn't be updated`)
+                        
                     }
                 })
             } else {
@@ -97,8 +107,11 @@ function ModalCreateAlert(props) {
                         setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
                         setStage(1)
                         handleVisibleModal(false)
+                        handleNotificationInfo('validation', `Success, your alert was successfully created`)
                     } else {
                         console.log(data.error)
+                        handleNotificationInfo('delete', `Failure, your alert couldn't be created`)
+                        
                     }
                 })
             }
@@ -106,6 +119,9 @@ function ModalCreateAlert(props) {
     }, [stage])
 
     return (<>
+          <div className={styles.notification}>
+        {notificationInfo && <Notification type={notificationInfo.type} message={notificationInfo.message} />}
+        </div>
         <Modal title={modalUpdate ? "Update alert" : "Create new alert"} onCancel={() => handleVisibleModal(false)} visible={modalVisible} footer={null} >
             {stage === 1 && <AlertInfosConfig key={props.id ? props.id: ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
             

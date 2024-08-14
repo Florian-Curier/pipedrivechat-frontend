@@ -50,3 +50,10 @@
   .edit :hover {
     color: black;
   }
+
+  .notification {
+    position:absolute;
+    top: 8vh;
+    right: 35vw;
+    left: 35vw;
+  }
