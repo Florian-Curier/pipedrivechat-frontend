@@ -5,6 +5,8 @@ import { deleteAlertInStore } from '../reducers/alerts'
 import { useDispatch } from 'react-redux';
 import ModalCreateAlert from './ModalCreateAlert';
 import { useRouter } from 'next/router';
+import { Modal } from 'antd';
+
 
 function Alert(props) {
 
