@@ -50,10 +50,7 @@
     align-items: center;
     height: 8vh;
     width: 25%;
- 
- 
 }
-
 
 .delete {
 
@@ -64,4 +61,11 @@
 
   .delete :hover {
     color: black;
+  }
+
+  .modalFooter {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.16px;
+    margin-top: 20px;
   }
