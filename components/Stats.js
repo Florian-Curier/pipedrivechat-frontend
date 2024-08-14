@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/Stats.module.css'
 import DateFilters from './DateFilters';
 import Chart from './Chart';
+import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
 
 
@@ -158,11 +159,13 @@ function Stats() {
             </div>
 
             <div className={styles.containerPie}>
-                <div>
+                <div className={styles.graphPie}>
+                    {!messagesByAllAlert && <Spin/>}
                     {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' />}
                 </div>
 
-                <div>
+                <div className={styles.graphPie}>
+                    {!messagesByAllChannel && <Spin/>}
                     {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' />}
                 </div>
             </div>

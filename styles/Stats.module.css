@@ -64,3 +64,10 @@
     border-bottom: 3px solid #D9D9D9;
     padding-bottom: 50px;
 }
+
+.graphPie{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;;
+}
