@@ -48,5 +48,7 @@
 
 .menuContainer{
     display: flex;
-    width: 70vw;
+    align-items: center;
+    justify-content: space-between;
+    width: 50vw;
 }

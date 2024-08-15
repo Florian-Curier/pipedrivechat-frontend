@@ -86,6 +86,9 @@ function Header() {
           Usage statistics
         </span>
       </Link>
+
+      </div>
+
       <Popover
         className={styles.popover}
         title="Google Account"
@@ -94,13 +97,6 @@ function Header() {
           <FontAwesomeIcon icon={faUser} />
         </Button>
       </Popover>
-
-
-
-
-
-
-      </div>
 
 
     </header>
