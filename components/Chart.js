@@ -127,7 +127,7 @@ function Chart(props) {
                     <select value={channelId} onChange={(e) => setChannelId(e.target.value)}>
                         {channelsData}
                     </select>
-                    <button className="btn bgGreen" onClick={() => sendImage()}>Envoyer le graphique</button>
+                    <button className="btn bgGreen" onClick={() => sendImage()}>Share Chart</button>
                 </div>
             }
         </div>
