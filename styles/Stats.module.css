@@ -5,6 +5,7 @@
     align-items: center;
     height: 8vh;
     margin-bottom: 20px;
+    
 }
 
 .containerFilters { 
@@ -51,7 +52,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+   
 }
 
 .containerBar div{
