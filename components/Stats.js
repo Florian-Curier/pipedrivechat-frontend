@@ -38,7 +38,7 @@ function Stats() {
             if(!endDate){
                 setEndDate('null')
             }
-
+            console.log("DATES : ", startDate, endDate)
             const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/all/${user.pipedrive_company_id}/${user.pipedrive_user_id}/${startDate}/${endDate}/${displayType}`)
             const data = await response.json()
            
@@ -53,7 +53,7 @@ function Stats() {
             const data = await response.json()
             
             setAlertsList(data.alerts)
-            setAlertId(data.alerts[0]._id)
+            setAlertId(data.alerts[0]?._id)
 
             // Génération du graphique de tous les messages par alerte
             let dataGraph = []
@@ -149,7 +149,7 @@ function Stats() {
     if(channelsList){
         channelsData = channelsList.map((channel, i) => <option key={i} value={channel.name.slice(7)}>{channel.displayName}</option>)
     }
-
+    console.log("ALL MESSAGES : ", allMessages)
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -160,12 +160,12 @@ function Stats() {
             <div className={styles.containerPie}>
                 <div className={styles.graphPie}>
                     {!messagesByAllAlert && <Spin/>}
-                    {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' />}
+                    {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' hideNotification={true}/>}
                 </div>
 
                 <div className={styles.graphPie}>
                     {!messagesByAllChannel && <Spin/>}
-                    {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' />}
+                    {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' hideNotification={true} />}
                 </div>
             </div>
 
@@ -187,21 +187,21 @@ function Stats() {
 
             <div className={styles.containerBar}>
                 <div>
-                    {allMessages !== null && <Chart send={false} label="Messages" chartData={allMessages} chartType='Bar' chartTitle='All messages' />}
+                    {allMessages !== null && <Chart send={false} label="Messages" chartData={allMessages} chartType='Bar' chartTitle='All messages' hideNotification={true} />}
                 </div>
 
                 <div>
                     <select value={alertId} className={styles.keyValue} onChange={(e) => setAlertId(e.target.value)}>
                         {alertsData}
                     </select>
-                    {messagesByAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAlert} chartType='Bar' chartTitle='Messages by alert' />}
+                    {messagesByAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAlert} chartType='Bar' chartTitle='Messages by alert' hideNotification={true} />}
                 </div>
 
                 <div>
                     <select value={channelId} className={styles.keyValue} onChange={(e) => setChannelId(e.target.value)}>
                         {channelsData}
                     </select>
-                    {messagesByChannel !== null && <Chart send={false} label="Messages" chartData={messagesByChannel} chartType='Bar' chartTitle='Messages by channel' />}
+                    {messagesByChannel !== null && <Chart send={false} label="Messages" chartData={messagesByChannel} chartType='Bar' chartTitle='Messages by channel' hideNotification={true}/>}
                 </div>
             </div>
         </div>

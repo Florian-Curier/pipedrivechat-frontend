@@ -52,12 +52,12 @@ function Alert(props) {
 
   return (
     <div className={styles.alertContainer}>
-      <Button
+      <button
         className={styles.alertName}
         onClick={() => handleClickAlertDetails()}
       >
         {props.alert.alert_name}
-      </Button>
+      </button>
       <span className={styles.alertItem}>
         {" "}
         {props.alert.trigger_id.trigger_name}
