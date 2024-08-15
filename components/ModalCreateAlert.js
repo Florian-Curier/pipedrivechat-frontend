@@ -17,22 +17,22 @@ function ModalCreateAlert(props) {
     const [notificationInfo, setNotificationInfo] = useState(null)
 
     const [modalVisible, setModalVisible] = useState(false)
-    const [newAlert, setNewAlert] = useState({alert_name: '', trigger_id: {}, google_channel_id: '', google_channel_name: ''})
+    const [newAlert, setNewAlert] = useState({ alert_name: '', trigger_id: {}, google_channel_id: '', google_channel_name: '' })
     const modalUpdate = props.type === "update" ? true : false
-    
+
     useEffect(() => {
         console.log("props modal useEffect: ", props)
-        if(modalUpdate){
+        if (modalUpdate) {
             setNewAlert(props.alert)
         }
     }, [modalVisible])
-    
+
     // Variable permettant de gérer l'état d'avancement de la création d'une alerte
     const [stage, setStage] = useState(1)
-    
+
     // Fonction permettant de récupérer les données de la nouvelle alerte renseignées par l'utilsiateur dans les sous composants
     const updateNewAlert = (newInfoAlert) => {
-        setNewAlert({...newAlert, ...newInfoAlert});
+        setNewAlert({ ...newAlert, ...newInfoAlert });
         setStage(stage + 1)
     };
 
@@ -43,27 +43,27 @@ function ModalCreateAlert(props) {
 
     // Change la couleur des checkpoints selon l'état d'avancement
     let colorStage = 'bgGray'
-    if(stage === 2){
+    if (stage === 2) {
         colorStage = 'bgGreen'
     }
 
     function handleNotificationInfo(type, message) {
-        setNotificationInfo( {type, message })
-            }
+        setNotificationInfo({ type, message })
+    }
 
     // Enregistre la nouvelle alerte lorsque les étapes de la modale sont terminées
     useEffect(() => {
-        if(stage === 3){            
-            if(modalUpdate){
-                let updateAlert = { 
+        if (stage === 3) {
+            if (modalUpdate) {
+                let updateAlert = {
                     alert_id: newAlert._id,
-                    alert_name: newAlert.alert_name, 
-                    google_channel_id: newAlert.google_channel_id, 
-                    google_channel_name: newAlert.google_channel_name, 
-                    trigger_id: newAlert.trigger_id._id, 
-                    trigger_name: newAlert.trigger_id.trigger_name, 
-                    message: newAlert.message, 
-                    pipedrive_user_id: user.pipedrive_user_id, 
+                    alert_name: newAlert.alert_name,
+                    google_channel_id: newAlert.google_channel_id,
+                    google_channel_name: newAlert.google_channel_name,
+                    trigger_id: newAlert.trigger_id._id,
+                    trigger_name: newAlert.trigger_id.trigger_name,
+                    message: newAlert.message,
+                    pipedrive_user_id: user.pipedrive_user_id,
                     pipedrive_company_id: user.pipedrive_company_id,
                 }
 
@@ -72,28 +72,28 @@ function ModalCreateAlert(props) {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(updateAlert),
                 }).then(response => response.json()).then(data => {
-                    if(data.result){
-                        dispatch(updateAlertInStore(newAlert))
-                        setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
-                        setStage(1)
+                    if (data.result) {
                         handleVisibleModal(false)
+                        dispatch(updateAlertInStore(newAlert))
+                        setNewAlert({ alert_name: '', trigger_id: '', google_channel_id: '' })
+                        setStage(1)
                         handleNotificationInfo('validation', `Success, your alert was successfully updated`)
-                        
+
                     } else {
                         console.log(data.error)
                         handleNotificationInfo('delete', `Failure, your alert couldn't be updated`)
-                        
+
                     }
                 })
             } else {
-                let createAlert = { 
-                    alert_name: newAlert.alert_name, 
-                    google_channel_id: newAlert.google_channel_id, 
-                    google_channel_name: newAlert.google_channel_name, 
-                    trigger_id: newAlert.trigger_id._id, 
-                    trigger_name: newAlert.trigger_id.trigger_name, 
-                    message: newAlert.message, 
-                    pipedrive_user_id: user.pipedrive_user_id, 
+                let createAlert = {
+                    alert_name: newAlert.alert_name,
+                    google_channel_id: newAlert.google_channel_id,
+                    google_channel_name: newAlert.google_channel_name,
+                    trigger_id: newAlert.trigger_id._id,
+                    trigger_name: newAlert.trigger_id.trigger_name,
+                    message: newAlert.message,
+                    pipedrive_user_id: user.pipedrive_user_id,
                     pipedrive_company_id: user.pipedrive_company_id,
                 }
 
@@ -102,16 +102,16 @@ function ModalCreateAlert(props) {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(createAlert),
                 }).then(response => response.json()).then(data => {
-                    if(data.result){
-                        dispatch(addAlertInStore(data.newAlert))
-                        setNewAlert({alert_name: '', trigger_id: '', google_channel_id: ''})
-                        setStage(1)
+                    if (data.result) {
                         handleVisibleModal(false)
+                        dispatch(addAlertInStore(data.newAlert))
+                        setNewAlert({ alert_name: '', trigger_id: '', google_channel_id: '' })
+                        setStage(1)
                         handleNotificationInfo('validation', `Success, your alert was successfully created`)
                     } else {
                         console.log(data.error)
                         handleNotificationInfo('delete', `Failure, your alert couldn't be created`)
-                        
+
                     }
                 })
             }
@@ -119,20 +119,20 @@ function ModalCreateAlert(props) {
     }, [stage])
 
     return (<>
-          <div className={styles.notification}>
-        {notificationInfo && <Notification type={notificationInfo.type} message={notificationInfo.message} />}
+        <div className={styles.notification}>
+            {notificationInfo && <Notification type={notificationInfo.type} message={notificationInfo.message} />}
         </div>
         <Modal title={modalUpdate ? "Update alert" : "Create new alert"} onCancel={() => handleVisibleModal(false)} visible={modalVisible} footer={null} >
-            {stage === 1 && <AlertInfosConfig key={props.id ? props.id: ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
-            
-            {stage === 2 && <AlertMessageConfig key={props.id ? props.id: ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
+            {stage === 1 && <AlertInfosConfig key={props.id ? props.id : ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
 
-                <div className={styles.checkpoint}>
-                    <div className={`${styles.barre} bgGreen`}></div>
-                    <div onClick={() => setStage(1)} className={`${styles.point} ${colorStage}`}></div>
-                    <div className={`${styles.barre} ${colorStage}`}></div>
-                    <div className={`${styles.point} bgGray`}></div>
-                </div>
+            {stage === 2 && <AlertMessageConfig key={props.id ? props.id : ''} updateNewAlert={updateNewAlert} handleVisibleModal={handleVisibleModal} newAlert={newAlert} />}
+
+            <div className={styles.checkpoint}>
+                <div className={`${styles.barre} bgGreen`}></div>
+                <div onClick={() => setStage(1)} className={`${styles.point} ${colorStage}`}></div>
+                <div className={`${styles.barre} ${colorStage}`}></div>
+                <div className={`${styles.point} bgGray`}></div>
+            </div>
         </Modal>
 
         {modalUpdate && <FontAwesomeIcon icon={faPen} className={styles.edit} onClick={() => handleVisibleModal(true)} />}
