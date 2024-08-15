@@ -53,7 +53,7 @@ function Stats() {
             const data = await response.json()
             
             setAlertsList(data.alerts)
-            setAlertId(data.alerts[0]._id)
+            setAlertId(data.alerts[0]?._id)
 
             // Génération du graphique de tous les messages par alerte
             let dataGraph = []
