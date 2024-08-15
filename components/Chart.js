@@ -113,9 +113,11 @@ function Chart(props) {
         
     return (
         <>
-        <div className={styles.notification}>
-        {notificationInfo && <Notification type={notificationInfo.type} message={notificationInfo.message} />}
-        </div>
+             {!props.hideNotification && notificationInfo &&
+                <div className={styles.notification}>
+                    <Notification type={notificationInfo.type} message={notificationInfo.message} />
+                </div>
+            }
         <div className={styles.container}> 
             <h2>{props.chartTitle}</h2>
             <Bar ref={chartRef} data={messagesData} type={props.chartType} options={chartOptions} /> 

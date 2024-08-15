@@ -160,12 +160,12 @@ function Stats() {
             <div className={styles.containerPie}>
                 <div className={styles.graphPie}>
                     {!messagesByAllAlert && <Spin/>}
-                    {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' />}
+                    {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' hideNotification={true}/>}
                 </div>
 
                 <div className={styles.graphPie}>
                     {!messagesByAllChannel && <Spin/>}
-                    {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' />}
+                    {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' hideNotification={true} />}
                 </div>
             </div>
 
@@ -187,21 +187,21 @@ function Stats() {
 
             <div className={styles.containerBar}>
                 <div>
-                    {allMessages !== null && <Chart send={false} label="Messages" chartData={allMessages} chartType='Bar' chartTitle='All messages' />}
+                    {allMessages !== null && <Chart send={false} label="Messages" chartData={allMessages} chartType='Bar' chartTitle='All messages' hideNotification={true} />}
                 </div>
 
                 <div>
                     <select value={alertId} className={styles.keyValue} onChange={(e) => setAlertId(e.target.value)}>
                         {alertsData}
                     </select>
-                    {messagesByAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAlert} chartType='Bar' chartTitle='Messages by alert' />}
+                    {messagesByAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAlert} chartType='Bar' chartTitle='Messages by alert' hideNotification={true} />}
                 </div>
 
                 <div>
                     <select value={channelId} className={styles.keyValue} onChange={(e) => setChannelId(e.target.value)}>
                         {channelsData}
                     </select>
-                    {messagesByChannel !== null && <Chart send={false} label="Messages" chartData={messagesByChannel} chartType='Bar' chartTitle='Messages by channel' />}
+                    {messagesByChannel !== null && <Chart send={false} label="Messages" chartData={messagesByChannel} chartType='Bar' chartTitle='Messages by channel' hideNotification={true}/>}
                 </div>
             </div>
         </div>
