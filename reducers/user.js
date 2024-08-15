@@ -22,8 +22,12 @@ export const userSlice = createSlice({
             state.value.api_domain  = action.payload.api_domain,
             state.value.google_email = action.payload.google_email
         },
-    },
-});
 
-export const { updateUserInStore } = userSlice.actions;
+        clearGoogleEmailInStore: (state) => {
+            state.value.google_email = null
+
+        }
+    }});
+
+export const { updateUserInStore, clearGoogleEmailInStore } = userSlice.actions;
 export default userSlice.reducer;

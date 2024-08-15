@@ -4,6 +4,7 @@ import { Bar, Doughnut } from "react-chartjs-2";
 import { useRef } from "react";
 import { useSelector } from 'react-redux';
 import styles from '../styles/Chart.module.css'
+import Notification from './Notification';
 
 
 function Chart(props) {
@@ -14,6 +15,7 @@ function Chart(props) {
     const [base64Image, setBase64Image] = useState(null)
     const [channelId, setChannelId] = useState('')
     const [channelsList, setChannelsList] = useState('')
+    const [notificationInfo, setNotificationInfo] = useState(null)
 
     const backgroundColorTab = [
         "#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0", "#9966FF",
@@ -27,13 +29,12 @@ function Chart(props) {
     if(props.chartType === "Pie"){
         labelTitle = 'title'
     }
-
+    console.log("chart: ", labelTitle)
     // Construction de l'objet attendu par le chart
     const messagesData = {
         labels: props.chartData.map((data) => data[labelTitle]),
         datasets: [
             {
-                
                 data: props.chartData.map((data) => data.value),
                 backgroundColor: backgroundColorTab.slice(0, props.chartData.length),
                 borderColor: "grey",
@@ -51,6 +52,9 @@ function Chart(props) {
         },
     };
 
+    function handleNotificationInfo(type, message) {
+        setNotificationInfo( {type, message })
+            }
     
     const sendImage = () => {
         const chart = chartRef.current;
@@ -63,13 +67,16 @@ function Chart(props) {
         (async () => {
             const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/users/channels/${user.pipedrive_company_id}/${user.pipedrive_user_id}`)
             const data = await response.json()
-            
+            console.log(data)
+    
+            if (data.result){
             setChannelsList(data.channels)
             setChannelId(data.channels[0].name.slice(7))
+        }
         })()
     },[])
 
-    
+
     useEffect(() => {
         if(base64Image){
             fetch(`${NEXT_PUBLIC_BACKEND_URL}/dashboard/sendChart`, {
@@ -85,6 +92,11 @@ function Chart(props) {
             }).then((response) => response.json())
             .then((data) => {
                 console.log(data)
+                if(data.result) {
+                handleNotificationInfo('validation', `Success, your chart was successfully sent`)
+            } else {
+                handleNotificationInfo('delete', `Failure, your chart couldn't be sent`)
+            }
             });
         }
     }, [base64Image])
@@ -100,6 +112,10 @@ function Chart(props) {
     if(props.chartType === 'Bar') {
         
     return (
+        <>
+        <div className={styles.notification}>
+        {notificationInfo && <Notification type={notificationInfo.type} message={notificationInfo.message} />}
+        </div>
         <div className={styles.container}> 
             <h2>{props.chartTitle}</h2>
             <Bar ref={chartRef} data={messagesData} type={props.chartType} options={chartOptions} /> 
@@ -113,6 +129,7 @@ function Chart(props) {
                 </div>
             }
         </div>
+        </>
     );
     
     }

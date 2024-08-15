@@ -21,3 +21,10 @@
 .sendGraph button{
     width: 160px;
 }
+
+.notification {
+    position:absolute;
+    top: 8vh;
+    right: 35vw;
+    left: 35vw;
+  }

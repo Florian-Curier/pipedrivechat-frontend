@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/Stats.module.css'
 import DateFilters from './DateFilters';
 import Chart from './Chart';
+import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
 
 
@@ -11,7 +12,7 @@ function Stats() {
 
     const [startDate, setStartDate] = useState('null')
     const [endDate, setEndDate] = useState('null')
-    const [displayType, setDisplayType] = useState('Year')
+    const [displayType, setDisplayType] = useState('week')
 
     const [allMessages, setAllMessages] = useState(null)
 
@@ -50,7 +51,6 @@ function Stats() {
         (async () => {
             const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/alerts/${user.pipedrive_company_id}/${user.pipedrive_user_id}`)
             const data = await response.json()
-            console.log(data)
             
             setAlertsList(data.alerts)
             setAlertId(data.alerts[0]._id)
@@ -60,10 +60,11 @@ function Stats() {
             for(let element of data.alerts){
                 const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/alert/${element._id}/null/null/null`)
                 const data = await response.json()
-                console.log("PIE: ", data)
-                dataGraph.push({title: element.alert_name, value: data.messages[0].value})
+                
+                if(data.messages.length > 0){
+                    dataGraph.push({title: element.alert_name, value: data.messages[0].value})
+                }
             }
-
             setMessagesByAllAlert(dataGraph)
         })()
     }, [])
@@ -103,13 +104,13 @@ function Stats() {
             for(let element of data.channels){
                 const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/channel/${element.name.slice(7)}/null/null/null`)
                 const data = await response.json()
-                console.log("PIE CHANNEL: ", data)
 
                 let dataValue = 0
                 if(data.messages[0]){
                     dataValue = data.messages[0].value
                 }
-                dataGraph.push({title: element.displayName, value: dataValue})
+                if (dataValue > 0){
+                dataGraph.push({title: element.displayName, value: dataValue})}
             }
             
             setMessagesByAllChannel(dataGraph)
@@ -157,11 +158,13 @@ function Stats() {
             </div>
 
             <div className={styles.containerPie}>
-                <div>
+                <div className={styles.graphPie}>
+                    {!messagesByAllAlert && <Spin/>}
                     {messagesByAllAlert !== null && <Chart send={false} label="Messages" chartData={messagesByAllAlert} chartType='Pie' chartTitle='Messages by alerts' />}
                 </div>
 
-                <div>
+                <div className={styles.graphPie}>
+                    {!messagesByAllChannel && <Spin/>}
                     {messagesByAllChannel !== null && <Chart send={false} label="Messages" chartData={messagesByAllChannel} chartType='Pie' chartTitle='Messages by channels' />}
                 </div>
             </div>
@@ -174,11 +177,11 @@ function Stats() {
 
                 <span className={styles.keyName}> Display Type :</span>
                 <select value={displayType} className={styles.keyValue} onChange={(e) => setDisplayType(e.target.value)}>
-                    <option value="Day">Day</option>
-                    <option value="Week">Week</option>
-                    <option value="Month">Month</option>
-                    <option value="Quarter">Quarter</option>
-                    <option value="Year">Year</option>
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="quarter">Quarter</option>
+                    <option value="year">Year</option>
                 </select>
             </div>
 

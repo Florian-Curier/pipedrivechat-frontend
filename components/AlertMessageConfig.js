@@ -5,6 +5,7 @@ function AlertMessageConfig(props) {
   const [message, setMessage] = useState(props.newAlert.trigger_id.default_message);
   const [label, setLabel] = useState("");
   const [isToggleOn, setIsToggleOn] = useState(true);
+  
 
   const defaultMessage = props.newAlert.trigger_id.default_message
   const textareaRef = useRef(null);
