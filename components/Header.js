@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Header.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import "antd/dist/antd.css";
 import { Popover, Button } from "antd";
@@ -56,6 +57,12 @@ function Header() {
 
   return (
     <header className={styles.container}>
+
+      <Image  src='/pipedriveChatLogo.png' alt = 'Logo'  width={219} height={77} className={styles.logo}/>
+
+
+      <div className={styles.menuContainer}>
+
       <Link href="/alerts">
         <span
           className={`${styles.link} ${path === "/alerts" ? styles.active : ""
@@ -87,6 +94,15 @@ function Header() {
           <FontAwesomeIcon icon={faUser} />
         </Button>
       </Popover>
+
+
+
+
+
+
+      </div>
+
+
     </header>
   );
 }
