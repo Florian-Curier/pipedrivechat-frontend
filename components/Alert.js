@@ -78,24 +78,20 @@ function Alert(props) {
           onClick={showModal}
         />
       </span>
-      {/* Ajout de la modale pour la confirmation de suppression */}
-      <Modal
-        title="Confirmation de la suppression"
+         {/* Ajout de la modale pour la confirmation de suppression */}
+         <Modal
+        title="Confirmation of deletion"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        footer={null} //désactiver l'agencement des boutons
+        footer={null}//désactiver l'agencement des boutons
       >
-        <div className="modalParagraph">
-          <p>Are you sure you want to delete this alert ?</p>
+        <div className="modalParagraph" >
+        <p >Are you sure you want to delete this alert ?</p>
         </div>
         <div className={styles.modalFooter}>
-          <button className="btn bgRed" onClick={handleCancel}>
-            Cancel
-          </button>
-          <button className="btn bgGreen" onClick={handleOk}>
-            OK
-          </button>
+        <button className="btn bgRed" onClick={handleCancel}>Cancel</button>
+<button className="btn bgGreen" onClick={handleOk}>OK</button>
         </div>
       </Modal>
     </div>
