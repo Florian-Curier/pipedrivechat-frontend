@@ -38,7 +38,7 @@ function Stats() {
             if(!endDate){
                 setEndDate('null')
             }
-
+            console.log("DATES : ", startDate, endDate)
             const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/messages/all/${user.pipedrive_company_id}/${user.pipedrive_user_id}/${startDate}/${endDate}/${displayType}`)
             const data = await response.json()
            
@@ -149,7 +149,7 @@ function Stats() {
     if(channelsList){
         channelsData = channelsList.map((channel, i) => <option key={i} value={channel.name.slice(7)}>{channel.displayName}</option>)
     }
-
+    console.log("ALL MESSAGES : ", allMessages)
     return (
         <div className={styles.container}>
             <div className={styles.header}>
