@@ -48,14 +48,7 @@ let content =<div className={styles.container}><Spin/> </div>
   
 
 
-/*  else  {
-  content = <div className={styles.container}>
-        <h1 className={styles.title}> Oooops</h1>
-        <span>Something whent wrong during installation, please restart Authorization Process</span>
-        <button className='btn bgGreen' onClick={ () => handleClick()}> Start </button>
-        </div>
-} 
- */
+
 
   return (
 
@@ -68,22 +61,3 @@ let content =<div className={styles.container}><Spin/> </div>
 export default InstallConfirmation;
 
 
-/*  OLD CONFIRAMATION CONTENT
-
-
-const handleClick = () => {
-    router.push('/alerts') // REDIRECTION VERS HOME
-    
-        
-          content =
-  <div className={styles.container}>
-  <h1 className={styles.title}> Congratulations {user?.user_name} !</h1>
-  <span>Authorization completed with your google account  {user.google_email} </span>
-  <span>You can now configure your alerts in our program</span>
-  <button className='btn bgGreen' onClick={ () => handleClick()}>Start </button>
-  </div>  
-
-
-}
-
-  */

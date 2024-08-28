@@ -72,7 +72,7 @@ function Alert(props) {
           alert={props.alert}
           type="update"
         />
-        {/* <FontAwesomeIcon icon={faPen} className={styles.edit} onClick={() => handleClickEditAlert()} /> */}
+     
 
         <FontAwesomeIcon
           icon={faTrash}

@@ -90,16 +90,11 @@ function AlertInfosConfig(props) {
     // Boucle sur les triggers fetchés pour créer la liste déroulante
     let triggerSelectOptions = triggersList.map((element, i) => <option selected={element._id === trigger ? 'selected' : '' } key={i} value={element._id}>{element.trigger_name}</option>)
 
-    // for (let element of triggersList){
-    //  triggerSelectOptions.push(<option  value={element._id}>{element.trigger_name}</option>)   
-    // }
-    
+   
     // Boucle sur les channels fetchés pour créer la liste déroulante
     let channelSelectOptions = channelsList.map((element, i) => <option selected={element.name === channel ? 'selected' : '' } key={i} value={element.name}>{element.displayName}</option>)
 
-    // for (let element of channelsList){
-    //     channelSelectOptions.push(<option value={element.name}>{element.displayName}</option>)   
-    // }
+    
     console.log("alerInfo : ", alertName)
     return (
         <div className={styles.container} >

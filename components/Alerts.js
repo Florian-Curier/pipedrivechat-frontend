@@ -23,22 +23,6 @@ function Alerts() {
     console.log("reducer: ", alerts)
     const router = useRouter()
 
-    // const [alertsList, setAlertsList] = useState([]);
-
-    /* 
-     useEffect(() => {
-            const initializeSDK = async () => {
-                try {
-                    const sdk = await new AppExtensionsSDK().initialize();
-    
-                    console.log("sdk = ", sdk);
-                } catch (error) {
-                    console.log("Failed to initialize AppExtensionsSDK:", error);
-                }
-            };
-    
-            initializeSDK();
-        }, []); */
 
     useEffect(() => {
             if(!user.google_email && !user.pipedrive_user_id) {
@@ -51,8 +35,7 @@ function Alerts() {
             .then(response => response.json())
             .then(alertData => {
                 dispatch(updateAlertsInStore(alertData.alerts))
-                //setAlertsList([...alertData.alerts]);
-                // setAlertsList(alerts)
+               
             });
 
     }, []);
